@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import FilterBar from './FilterBar';
 import ResultCardComponent from './Resultcard';
 import Search from './Search';
-import { getAvailableFilters, searchTrademarks } from '../services/api';
+import { getAvailableFilters } from '../services/api';
 
 const TrademarkSearch = () => {
   const [viewMode, setViewMode] = useState('grid');

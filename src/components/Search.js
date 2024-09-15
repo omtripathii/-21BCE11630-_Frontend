@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { searchTrademarks } from '../services/api';
 
@@ -30,7 +30,7 @@ function Search({ onSearchResults }) {
     const [searchCount, setSearchCount] = useState(0);
     const [relatedKeywords, setRelatedKeywords] = useState([]);
 
-    const performSearch = async () => {
+    const performSearch = useCallback(async () => {
         try {
             const searchParams = {
                 input_query: searchTerm,
@@ -58,13 +58,13 @@ function Search({ onSearchResults }) {
         } catch (error) {
             console.error('Error performing search:', error);
         }
-    };
+    }, [searchTerm, onSearchResults]);
 
     useEffect(() => {
         if (searchTerm) {
             performSearch();
         }
-    }, [searchTerm]);
+    }, [searchTerm, performSearch]);
 
     const generateRelatedKeywords = (term) => {
         const keywords = [];
